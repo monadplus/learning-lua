@@ -1,5 +1,10 @@
 -------------------------------------------------------
--- Strings
+-- Values and types
+
+-- Basic types:  https://www.lua.org/manual/5.4/manual.html#2.1
+-- Coercions: https://www.lua.org/manual/5.4/manual.html#3.4.3
+
+-- Strings ops
 
 local str = "Arnau"
 print(string.upper(str))
@@ -467,3 +472,50 @@ print("Fib 10: " .. MyPackage2.fib_t(10))
 print("Before: ", _G["x"])
 x = 10
 print("After: ", _G["x"])
+
+---------------------------------------------------
+-- Standard Libraries
+
+-- https://www.lua.org/manual/5.4/manual.html#6
+
+
+--------------------------------------------------
+-- Coroutines
+
+-- https://www.lua.org/manual/5.4/manual.html#2.6
+
+-- NOTICE, this is not multithreading.
+-- Lua doesn't support multithreading by default
+-- You need to use something like https://lualanes.github.io/lanes/
+
+function foo (a)
+  print("foo", a)
+  -- Nested yields behave like yields in the main function
+  return coroutine.yield(2*a)
+end
+
+co = coroutine.create(
+    function (a,b)
+       print("co-body", a, b)
+       -- 'foo' will yield and make the first 'resum' return the value of the 'yield'.
+       -- next 'resum' will be executed from 'foo' assigning 'resum' parameters to 'r'.
+       local r = foo(a+1)
+       print("co-body", r)
+       local r, s = coroutine.yield(a+b, a-b)
+       print("co-body", r, s)
+       return b, "end"
+    end
+)
+
+-- co-body 1       10
+-- foo     2
+-- main    true    4
+print("main", coroutine.resume(co, 1, 10))
+-- co-body r
+-- main    true    11      -9
+print("main", coroutine.resume(co, "r"))
+-- co-body x       y
+-- main    true    10      end
+print("main", coroutine.resume(co, "x", "y"))
+-- main    false   cannot resume dead coroutine
+print("main", coroutine.resume(co, "x", "y"))
