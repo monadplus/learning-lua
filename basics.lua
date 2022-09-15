@@ -10,6 +10,7 @@ local str = "Arnau"
 print(string.upper(str))
 print(string.sub(str, 0, 3))
 print(str .. ":" .. str)
+-- https://www.lua.org/manual/5.4/manual.html#6.4.1
 print( string.format("Hello Mr. %s! How old are you? %d", "Arnau", 27))
 print( string.format("Double %.10f", math.pi))
 

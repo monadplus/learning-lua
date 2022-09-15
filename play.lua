@@ -56,3 +56,7 @@ print(tonumber("1") == 1)
 
 print(type(1))
 print(type(1.1))
+
+local str = "hello world"
+local i, j = string.find(str, "world")
+print(string.sub(str, i, j))
