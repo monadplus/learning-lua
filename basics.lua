@@ -7,6 +7,9 @@
 -- Strings ops
 
 local str = "Arnau"
+local str = 'Arnau'
+local str = [[Multiline
+String]]
 print(string.upper(str))
 print(string.sub(str, 0, 3))
 print(str .. ":" .. str)
