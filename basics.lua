@@ -238,6 +238,7 @@ local s1 = Set {1, 2, 3, 2, 4}
 Set = {}
 Set.mt = {} -- create a metatable for Set
 
+-- You can use syntax ':' (see Vec below)
 function Set.new (list)
     local set = {}
     setmetatable(set, Set.mt) -- associate each set object with the metatable
@@ -463,6 +464,6 @@ print("Fib 10: " .. MyPackage2.fib_t(10))
 -- Lua keeps all its global variables in a regular table, called the _environment_,
 -- and the the environment itself in a global variable `_G`.
 
-print("Before: " .. _G["x"])
+print("Before: ", _G["x"])
 x = 10
-print("After: " .. _G["x"])
+print("After: ", _G["x"])
