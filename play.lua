@@ -60,3 +60,30 @@ print(type(1.1))
 local str = "hello world"
 local i, j = string.find(str, "world")
 print(string.sub(str, i, j))
+
+-- Careful with unicode
+print(string.len("⧬⥬")) -- 6
+print(utf8.len("⧬⥬")) -- 2
+
+for line in io.lines("README.md") do
+  print(line)
+end
+
+local h = io.open("README.md", "r")
+if h
+  then
+    -- print(h:read("a"))
+    local line = h:read "l"
+    while line do
+      print(line)
+      line = h:read "l"
+    end
+    h:close()
+  else print("File README.md does not exists")
+end
+
+local t1 = os.time()
+print(t1)
+print(os.date())
+local t2 = os.time()
+print(os.difftime(t2, t1))
