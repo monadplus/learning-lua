@@ -86,9 +86,11 @@ local T = {"b", "c", "d"} --> {[1]="b", [2]="c", [3]="d"}
 T[1] = "a" --> {[1]="a", [2]="c", [3]="d"}
 T[10] = "j" --> {[1]="a", [2]="c", [3]="d", [10]="j"}
 
+-- Insert moves the other elements to open spaces.
 table.insert(T, "e") --> {[1]="a", [2]="c", [3]="d", [4],"e", [10]="j"}
 table.insert(T, 2, "b") --> {[1]="a", [2]="b", [3]="c", [4]="d", [5],"e", [10]="j"}
 
+-- Removes element and resizes array.
 T[3] = nil --> {[1]="a", [2]="b", [3]=nil, [4]="d", [5],"e", [10]="j"}
 table.remove(T, 3) --> {[1]="a", [2]="b", [4]="d", [5],"e", [10]="j"}
 

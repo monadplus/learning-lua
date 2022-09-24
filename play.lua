@@ -24,6 +24,37 @@ printVec(v1)
 table.sort(v1, function (e1, e2) return e1 < e2 end)
 printVec(v1)
 
+----------------------------------
+
+local Vector = {}
+
+function Vector:new (obj)
+    obj = obj or {}
+    setmetatable(obj, self)
+    self.__index = self
+    return obj
+end
+
+function Vector:fill(n)
+  if (n <= 0) then
+    return
+  end
+  for i = 1, n, 1 do
+    self[i] = math.random(100)
+  end
+end
+
+function Vector.__tostring(v)
+  return "{" .. table.concat(v, ", ") .. "}"
+end
+
+local vec = Vector:new()
+vec:fill(100)
+table.sort(vec, function (e1, e2) return e1 < e2 end)
+print(vec)
+
+----------------------------------
+
 function willError(n)
   if (n < 10) then
     return 0x10
